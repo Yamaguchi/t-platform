@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/chaintope/glueby
+  revision: 5d768e44fcace0abe60e2b7ba12650a302e6de94
+  specs:
+    glueby (0.1.0)
+      tapyrus
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -108,8 +115,6 @@ GEM
     ffi (1.14.2)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    glueby (0.1.0)
-      tapyrus
     i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     iniparse (1.5.0)
@@ -146,6 +151,7 @@ GEM
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
+    pg (1.2.3)
     public_suffix (4.0.6)
     puma (4.3.7)
       nio4r (~> 2.0)
@@ -295,12 +301,13 @@ DEPENDENCIES
   delayed_job_recurring
   devise
   factory_bot_rails
-  glueby
+  glueby!
   jbuilder (~> 2.7)
   jquery-rails
   listen (~> 3.2)
   material_icons
   materialize-sass (~> 1.0.0)
+  pg
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.4)
   rspec-rails
