@@ -64,6 +64,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     self.resource = resource_class.new_with_session(hash, session)
     self.resource.organization_unit ||= OrganizationUnit.first
     guest_role = Role.find_by(name: 'guest')
-    RoleUser.create(role: guest_role, user: self.resource, primary: true)
+    UserRole.create(role: guest_role, user: self.resource, primary: true)
   end
 end

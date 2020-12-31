@@ -5,13 +5,13 @@ class Roles::UsersController < ApplicationController
 
   def new
     @users = User.accessible(current_user).all - @role.users
-    @role_user = RoleUser.new(create_params)
+    @user_role = UserRole.new(create_params)
   end
 
   def create
     @user = Role.accessible(current_user).find(create_params[:user])
-    @role_user = RoleUser.new(role: @role, user: @user)
-    if @role_user.save!
+    @user_role = UserRole.new(role: @role, user: @user)
+    if @user_role.save!
       redirect_to edit_role_path(@role), notice: 'The User has been added successfully.'
     else
       render action: :new
@@ -35,7 +35,7 @@ class Roles::UsersController < ApplicationController
   end
 
   def create_params
-    params.fetch(:role_user, {}).permit(:user)
+    params.fetch(:user_role, {}).permit(:user)
   end
 end
 

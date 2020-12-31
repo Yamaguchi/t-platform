@@ -66,11 +66,11 @@ table
         td[colspan=4]
           | No users
     - else
-      - @role.user_roles.each do |role_user|
+      - @role.user_roles.each do |user_role|
         tr
-          td = role_user.user.name || "(No name)"
-          td = role_user.user.email
-          td = boolean_to_check_mark(role_user.primary)
+          td = user_role.user.name || "(No name)"
+          td = user_role.user.email
+          td = boolean_to_check_mark(user_role.primary)
           td
-            - if role_user.user.can_update?(current_user)
-              = link_to "Detail", user_path(role_user.user), class: "btn"
+            - if user_role.user.can_update?(current_user)
+              = link_to "Detail", user_path(user_role.user), class: "btn"
