@@ -1,0 +1,22 @@
+h2
+  | Users
+
+table
+  thead
+    tr
+      th
+        | email
+      th
+        | organization unit
+      th
+        | actions
+  tbody
+    - @users.each do |user|
+      tr
+        td = user.email
+        td = user.organization_unit.name
+        td
+          = link_to "Detail", user_path(user), class: "btn"
+          - if user.can_update?(current_user)
+            .spacer
+            = link_to "Edit", edit_user_path(user), class: "btn"

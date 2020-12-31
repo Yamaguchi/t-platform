@@ -1,0 +1,62 @@
+h2 = render "shared/breadcrumb", contents: [{ label: "Tokens", path: tokens_path }, { label: @token.name }]
+
+h3
+  | General
+
+table
+  tbody
+    tr
+      td
+        | name
+      td
+        = @token.name
+    tr
+      td
+        | token type
+      td
+        = token_type_label(@token.token_type)
+    tr
+      td
+        | color id
+      td
+        = @token.color_id
+
+h3
+  | Balance
+table
+  tbody
+    tr
+      td
+        | balance
+      td
+        = @token.balance
+
+h3
+  | Transactions
+
+table
+  thead
+    tr
+      th
+        | created at
+      th
+        | sender
+      th
+        | operation type
+      th
+        | receiver
+      th
+        | value
+  tbody
+    -if @token.transactions.empty?
+      tr
+        td[colspan=4]
+          | No transactions
+    - else
+      - @token.transactions.each do |transaction|
+        tr
+          td = transaction.created_at
+          td = transaction_token_sender(transaction)
+          td = transaction_operation_type_label(transaction)
+          td = transaction_token_receiver(transaction)
+          td = transaction_token_amount(transaction)

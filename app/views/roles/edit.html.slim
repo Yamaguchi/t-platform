@@ -1,0 +1,89 @@
+h2 = render "shared/breadcrumb", contents: [{ label: "Roles", path: roles_path }, { label: "Edit #{@role.name}" }]
+
+h3
+  | General
+
+= form_with(model: @role, scope: :role, url: edit_role_path) do |f|
+  = render "shared/errors", resource: @role
+  .input-field
+    = f.label :name
+    br
+    = f.text_field :name, autofocus: true
+  .input-field
+    = f.label :description
+    br
+    = f.text_area :description, class: 'materialize-textarea'
+  .actions
+    = f.submit "Save", class: 'btn'
+
+h3
+  | Privileges
+  - if EntityPrivilege.can_create?(current_user)
+    = link_to new_role_entity_privilege_path(@role), class: "btn-floating btn-large right" do
+      i.material-icons add
+
+table
+  thead
+    tr
+      th
+        | entity name
+      th
+        | READ
+      th
+        | CREATE
+      th
+        | UPDATE
+      th
+        | DELETE
+      th
+        | actions
+  tbody
+    -if @role.entity_privileges.empty?
+      tr
+        td[colspan=5]
+          | No privileges
+    - else
+      - @role.entity_privileges.each do |privilege|
+        tr
+          td = privilege.entity_name
+          td = access_level_label(privilege.read_access)
+          td = access_level_label(privilege.create_access)
+          td = access_level_label(privilege.update_access)
+          td = access_level_label(privilege.delete_access)
+          td
+            - if privilege.can_update?(current_user)
+              = link_to "Edit", edit_role_entity_privilege_path(@role, privilege), class: "btn"
+            - if privilege.can_delete?(current_user)
+              .spacer
+              = link_to "Delete", role_entity_privilege_path(@role, privilege), data: { confirm: "Are you sure?" }, method: :delete, class: "btn danger"
+
+h3
+  | Users
+  = link_to new_role_users_path(@role), class: "btn-floating btn-large right" do
+      i.material-icons add
+
+table
+  thead
+    tr
+      th
+        | name
+      th
+        | email
+      th
+        | primary
+      th
+        | actions
+  tbody
+    -if @role.user_roles.empty?
+      tr
+        td[colspan=4]
+          | No users
+    - else
+      - @role.user_roles.each do |user_role|
+        tr
+          td = user_role.user.name || "(No name)"
+          td = user_role.user.email
+          td = boolean_to_check_mark(user_role.primary)
+          td
+            - if user_role.user.can_update?(current_user) && !user_role.primary
+              = link_to "Remove", user_role_path(@role, user_role.user), data: { confirm: "Are you sure?" }, method: :delete, class: "btn danger"

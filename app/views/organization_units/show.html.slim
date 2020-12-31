@@ -1,0 +1,23 @@
+h2 = render "shared/breadcrumb", contents: [{ label: "Organization Units", path: organization_units_path}, {label: @organization_unit.name }]
+
+h3
+  | General
+
+table
+  tbody
+    tr
+      td
+        | name
+      td
+        = @organization_unit.name
+    tr
+      td
+        | Parent
+      td
+        - if parent = @organization_unit.parent
+          - if parent.can_read?(current_user)
+            = link_to parent.name, organization_unit_path(parent)
+          - else
+            = parent.name
+        - else
+          | (None)

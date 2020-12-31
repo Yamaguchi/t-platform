@@ -1,0 +1,76 @@
+h2 = render "shared/breadcrumb", contents: [{ label: "Roles", path: roles_path }, { label: @role.name }]
+
+h3
+  | General
+
+table
+  tbody
+    tr
+      td
+        | name
+      td
+        = @role.name
+    tr
+      td
+        | description
+      td
+        = @role.description
+
+h3
+  | Privileges
+
+table
+  thead
+    tr
+      th
+        | entity name
+      th
+        | READ
+      th
+        | CREATE
+      th
+        | UPDATE
+      th
+        | DELETE
+  tbody
+    -if @role.entity_privileges.empty?
+      tr
+        td[colspan=5]
+          | No privileges
+    - else
+      - @role.entity_privileges.each do |privilege|
+        tr
+          td = privilege.entity_name
+          td = access_level_label(privilege.read_access)
+          td = access_level_label(privilege.create_access)
+          td = access_level_label(privilege.update_access)
+          td = access_level_label(privilege.delete_access)
+
+h3
+  | Users
+
+table
+  thead
+    tr
+      th
+        | name
+      th
+        | email
+      th
+        | primary
+      th
+        | actions
+  tbody
+    -if @role.user_roles.empty?
+      tr
+        td[colspan=4]
+          | No users
+    - else
+      - @role.user_roles.each do |role_user|
+        tr
+          td = role_user.user.name || "(No name)"
+          td = role_user.user.email
+          td = boolean_to_check_mark(role_user.primary)
+          td
+            - if role_user.user.can_update?(current_user)
+              = link_to "Detail", user_path(role_user.user), class: "btn"

@@ -1,0 +1,85 @@
+@import "color";
+body {
+  background-color: $bg-color;
+  color: $fg-color;
+}
+h3 {
+  padding-top: 2.0em
+}
+.sidenav {
+  .avatar {
+    position: relative;
+    border: 1px solid #e0e0e0;
+    padding: 24px 0 24px 0;
+  }
+  .current-user {
+    li {
+      line-height: 24px;
+    }
+  }
+}
+
+input[type="file"] {
+  display: none;
+}
+.avatar {
+  background: none;
+  box-shadow: none;
+  border: none;
+}
+.breadcrumb {
+  font-size: inherit;
+  color: $fg-color;
+  &:before {
+    color: $fg-color;
+    font-size: inherit;
+  }
+  &:last-child {
+    color: grey;
+  }
+}
+
+.banner {
+  height: 64px;
+  div {
+    height: 100%;
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.spacer {
+  width: 8px;
+  display: inline-block;
+}
+
+.notice {
+  background-color: lighten($success-color, 40%);
+  color: $success-color;
+}
+.alert {
+  background-color: lighten($error-color, 40%);
+  color: $error-color;
+}
+
+.success {
+  color: $success-color;
+}
+
+.btn.danger {
+  background-color: $error-color;
+  color: $bg-color;
+}
+
+.errors {
+  padding: 8px;
+  div {
+    display: flex;
+    align-items: center;
+  }
+  li {
+    list-style-type: initial;
+    margin-left: 64px;
+  }
+}

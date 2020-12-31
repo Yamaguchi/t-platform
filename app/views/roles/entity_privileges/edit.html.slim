@@ -1,0 +1,31 @@
+h2
+  | Edit Entity Privilege
+
+h3
+  | General
+
+= form_with(model: [@role, @entity_privilege], scope: :entity_privilege, url: edit_role_entity_privilege_path) do |f|
+  = render "shared/errors", resource: @entity_privilege
+  .input-field
+    = f.label :entity_name
+    br
+    = f.text_field :entity_name, readonly: :readonly
+  .input-field
+    = f.label :read_access
+    br
+    = f.select :read_access, access_level_options, autofocus: true
+  .input-field
+    = f.label :create_access
+    br
+    = f.select :create_access, access_level_options
+  .input-field
+    = f.label :update_access
+    br
+    = f.select :update_access, access_level_options
+  .input-field
+    = f.label :delete_access
+    br
+    = f.select :delete_access, access_level_options
+  .actions
+    = f.submit "Save", class: 'btn'
+

@@ -1,0 +1,18 @@
+h2
+  | New Role
+
+h3
+  | General
+
+= form_with(model: @role, scope: :role, url: new_role_path) do |f|
+  = render "shared/errors", resource: @role
+  .input-field
+    = f.label :name
+    br
+    = f.text_field :name, autofocus: true
+  .input-field
+    = f.label :description
+    br
+    = f.text_area :description, class: 'materialize-textarea'
+  .actions
+    = f.submit "Save", class: 'btn'

@@ -1,0 +1,25 @@
+h2
+  | Edit Token
+= form_for(@token_form, url: edit_wallet_token_path) do |f|
+  = render "shared/errors", resource: @token_form
+  .field
+    = f.label :name
+    br
+    = f.text_field :name, autofocus: true
+  .field
+    = f.label :token_type
+    br
+    = f.label :token_type, value: Tapyrus::Color::TokenTypes::REISSUABLE do
+      = f.radio_button :token_type, Tapyrus::Color::TokenTypes::REISSUABLE, disabled: true, class: "with-gap"
+      span Reissuable
+    br
+    = f.label :token_type, value: Tapyrus::Color::TokenTypes::NON_REISSUABLE do
+      = f.radio_button :token_type, Tapyrus::Color::TokenTypes::NON_REISSUABLE, disabled: true, class: "with-gap readonly"
+      span Non reissuable
+    br
+    = f.label :token_type, value: Tapyrus::Color::TokenTypes::NFT  do
+      = f.radio_button :token_type, Tapyrus::Color::TokenTypes::NFT, disabled: true, class: "with-gap readonly"
+      span NFT
+  .actions
+    = f.submit "Save", class: 'btn'
+  

@@ -1,0 +1,14 @@
+h2
+  | Transfer Token
+= form_for(@token_transfer_form, url: transfer_wallet_token_path) do |f|
+  = render "shared/errors", resource: @token_transfer_form
+  .field
+    = f.label :receiver
+    br
+    = f.select :receiver, @receivers.map { |r| [r.email, r.wallets.first&.id] }
+  .field
+    = f.label :amount
+    br
+    = f.number_field :amount
+  .actions
+    = f.submit "Transfer token", class: 'btn'

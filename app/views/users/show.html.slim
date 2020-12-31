@@ -1,0 +1,120 @@
+h2 = render "shared/breadcrumb", contents: [{ label: "Users", path: users_path }, { label: @user.email }]
+
+h3 
+  | General
+
+table
+  tbody
+    tr
+      td
+        | name
+      td
+        = @user.name
+      td
+       | 
+    tr
+      td
+        | Organization unit
+      td
+        = @user.organization_unit.name
+      td
+        - if @user.organization_unit.can_read?(current_user)
+          = link_to "Detail", organization_unit_path(@user.organization_unit), class: "btn"
+        - else
+          | 
+
+h3
+  | Roles
+
+table
+  thead
+    tr
+      th
+        | name
+      th
+        | primary
+      th
+        | actions
+  tbody
+    - @user.user_roles.order(primary: :desc).each do |user_role|
+      tr
+        td = user_role.role.name
+        td = boolean_to_check_mark(user_role.primary)
+        td
+          - if user_role.role.can_read?(current_user)
+            = link_to "Detail", role_path(user_role.role), class: "btn"
+
+
+h3
+  | Authentication and Audit
+
+table
+  tbody
+    tr
+      td
+        | Reset password sent at
+      td
+        = @user.reset_password_sent_at
+    tr
+      td
+        | Remember created at
+      td
+        = @user.remember_created_at
+    tr
+      td
+        | Sign in count
+      td
+        = @user.sign_in_count
+    tr
+      td
+        | Current sign in at
+      td
+        = @user.current_sign_in_at
+    tr
+      td
+        | Last sign in at
+      td = @user.last_sign_in_at
+    tr
+      td
+        | Current sign in ip
+      td
+        = @user.current_sign_in_ip
+    tr
+      td
+        | Last sign in ip
+      td
+        = @user.last_sign_in_ip
+    tr
+      td
+        | Confirmed at
+      td
+        = @user.confirmed_at
+    tr
+      td
+        | Confirmation sent at
+      td
+        = @user.confirmation_sent_at
+    tr
+      td
+        | Unconfirmed email
+      td
+        = @user.unconfirmed_email
+    tr      
+      td 
+        | Failed attempts
+      td = @user.failed_attempts
+    tr
+      td
+        | Locked at
+      td
+        = @user.locked_at
+    tr
+      td
+        | Created at
+      td
+        = @user.created_at
+    tr
+      td
+        | Updated at
+      td
+        = @user.updated_at

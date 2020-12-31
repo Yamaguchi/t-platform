@@ -1,0 +1,21 @@
+h2
+  | Tokens
+
+table
+  thead
+    tr
+      th
+        | name
+      th
+        | token type
+      th
+        | color id
+      th
+        | actions
+  tbody
+    - @tokens.each do |token|
+      tr
+        td = token.name
+        td = token_type_label(token.token_type)
+        td = token.color_id
+        td = link_to "Detail", token_path(token), class: "btn"

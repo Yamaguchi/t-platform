@@ -1,0 +1,7 @@
+@import "materialize/components/color-variables";
+$bg-color: color("grey", "lighten-4") !default;
+$fg-color: color("grey", "darken-3") !default;
+$primary-color: color("blue", "darken-4") !default;
+$secondary-color: color("lime", "darken-1") !default;
+$success-color: color("green", "darken-3") !default;
+$error-color: color("red", "darken-3") !default;

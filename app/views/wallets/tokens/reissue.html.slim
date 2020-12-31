@@ -1,0 +1,10 @@
+h2
+  | Reissue Token
+= form_for(@token_form, url: reissue_wallet_token_path) do |f|
+  = render "shared/errors", resource: @token_form
+  .field
+    = f.label :amount
+    br
+    = f.number_field :amount
+  .actions
+    = f.submit "Reissue token", class: 'btn'

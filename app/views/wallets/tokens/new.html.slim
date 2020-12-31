@@ -1,0 +1,28 @@
+h2
+  | New Token
+= form_for(@token, url: new_wallet_token_path) do |f|
+  = render "shared/errors", resource: @token
+  .field
+    = f.label :name
+    br
+    = f.text_field :name, autofocus: true
+  .field
+    = f.label :token_type
+    br
+    = f.label :token_type, value: Tapyrus::Color::TokenTypes::REISSUABLE do
+      = f.radio_button :token_type, Tapyrus::Color::TokenTypes::REISSUABLE, checked: "checked", class: "with-gap"
+      span Reissuable
+    br
+    = f.label :token_type, value: Tapyrus::Color::TokenTypes::NON_REISSUABLE do
+      = f.radio_button :token_type, Tapyrus::Color::TokenTypes::NON_REISSUABLE, class: "with-gap"
+      span Non reissuable
+    br
+    = f.label :token_type, value: Tapyrus::Color::TokenTypes::NFT  do
+      = f.radio_button :token_type, Tapyrus::Color::TokenTypes::NFT, class: "with-gap"
+      span NFT
+  .field
+    = f.label :amount
+    br
+    = f.number_field :amount
+  .actions
+    = f.submit "Create new token", class: 'btn'

@@ -1,0 +1,49 @@
+h1
+  | Wallets
+- @wallets.each do |wallet|
+  .card
+    .card-content
+      .card-title = wallet.wallet_id
+      .chip = wallet.receive_address
+      table
+        thead
+          tr
+            th
+              | name
+            th
+              | coin id
+            th
+              | balance
+            th
+              | actions
+        tbody
+          - tokens = @tokens[wallet.id]
+          - if tokens.empty?
+            tr
+              td[colspan=4]
+                | No token
+          - else
+            - tokens.each do |token|
+              tr
+                td = token[:name]
+                td = token[:color_id]
+                td = token[:amount]
+                td
+                  - token_ref = token[:token]
+                  - if token_ref&.can_update?(current_user)
+                    = link_to "Edit", edit_wallet_token_path(wallet, token_ref), class: "btn"
+                    span.spacer
+                  - if token_ref
+                    = link_to "Transfer", transfer_wallet_token_path(wallet, token_ref), class: "btn"
+                    span.spacer
+                  - if token_ref&.reissuable? && token_ref&.can_create?(current_user)
+                    = link_to "Reissue", reissue_wallet_token_path(wallet, token_ref), class: "btn"
+      .card-action
+        - if Token.can_create?(current_user)
+          = link_to "Create new token", new_wallet_token_path(wallet), class: "btn"
+- if @wallets.empty?
+  .card
+    = form_for(:wallets, url: wallets_path) do |f|
+      .card-action
+        = f.submit "Create new wallet", class: 'btn'
+

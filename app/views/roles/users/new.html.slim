@@ -1,0 +1,10 @@
+h2 Add User
+
+= form_with(model: @user_role, scope: :user_role, url: new_role_user_path(@role)) do |f|
+  = render "shared/errors", resource: @user_role
+  .field
+    = f.label :user
+    br
+    = f.select :user, @users.map { |user| [user.email, user.id]}, autofocus: true
+  .actions
+    = f.submit "Save", class: 'btn'

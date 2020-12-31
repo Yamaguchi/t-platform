@@ -1,0 +1,3 @@
+.valign-wrapper
+  - contents.each do |content|
+    = link_to content[:label], (content[:path] || '#'), class: "breadcrumb"
