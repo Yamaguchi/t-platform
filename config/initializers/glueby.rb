@@ -1,3 +1,4 @@
+
 # Edit configuration for connection to tapyrus core
 yaml = Pathname.new(Rails.root.join('config', 'tapyrus.yml')) 
 config = YAML.load(ERB.new(yaml.read).result).deep_symbolize_keys
