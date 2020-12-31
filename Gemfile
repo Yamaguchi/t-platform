@@ -70,8 +70,8 @@ gem 'devise'
 gem 'ancestry'
 
 # Tapyrus blockchain
-gem 'tapyrus', path: '../../chaintope/tapyrus/tapyrusrb'
-gem 'glueby', path: '../../chaintope/tapyrus/tapyrus-contractrb'
+gem 'tapyrus'
+gem 'glueby'
 
 #  Material Design
 gem 'materialize-sass', '~> 1.0.0'
