@@ -1,0 +1,30 @@
+h2
+  | Organization Units
+
+.divider
+
+table
+  thead
+    tr
+      th
+        | name
+      th
+        | parent
+      th
+        | actions
+  tbody
+    - @organization_units.each do |organization_unit|
+      tr
+        td = organization_unit.name
+        td
+          - if parent = organization_unit.parent
+            - if parent.can_read?(current_user)
+              = link_to parent.name, organization_unit_path(parent)
+            - else
+              = parent.name
+          - else
+            | (None)
+        td
+          - if organization_unit.can_read?(current_user)
+            = link_to "Detail", organization_unit_path(organization_unit), class: "btn"
+

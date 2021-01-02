@@ -1,5 +1,6 @@
 class DashboardsController < ApplicationController
   before_action :authenticate_user!
+
   def index
     @wallets = current_user.wallets
     @tokens = @wallets.map do |wallet|
