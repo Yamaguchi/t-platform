@@ -119,6 +119,5 @@ Rails.application.configure do
     domain: 'heroku.com',
     enable_starttls_auto: true
   }
-  config.action_mailer.default_url_options = { :host => 'tapyrus-platform.herokuapp.com', :protocol => 'https'}
-  config.mailer
+  config.action_mailer.default_url_options = { :host => 'tapyrus-platform.herokuapp.com', :protocol => 'https' }
 end
